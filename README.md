@@ -2,7 +2,9 @@
 
 - Lighter code to train __Korean SimCSE__   
 - Dependency Problem Alleviation & Ease of Customization     
-- Reference : SimCSE Paper, Original Code      
+- Reference : SimCSE Paper, Original Code
+
+<img src="simcse.PNG" alt="example image" width="700" height="300"/>
 
 ## 1. Training
 
