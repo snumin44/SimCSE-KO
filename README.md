@@ -49,8 +49,24 @@
 ## 3. Implementation
 
 - __Download korSTS__
+```
+cd data
+sh download_korsts.sh
+```
 - __Supervised Training__
+```
+cd train
+sh run_train_supervised.sh
+```
 - __Unsupervised Training__
+```
+cd train
+sh run_train_unsupervised.sh
+```
 - __Evaluation__
+```
+cd evaluation
+sh run_eval.sh
+```
 
 ## Citing
