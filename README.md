@@ -4,7 +4,7 @@
 - Dependency Problem Alleviation & Ease of Customization     
 - Reference : SimCSE Paper, Original Code
 
-<img src="simcse.PNG" alt="example image" width="700" height="300"/>
+<img src="simcse.PNG" alt="example image" width="600" height="200"/>
 
 ## 1. Training
 
