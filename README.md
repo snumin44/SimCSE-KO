@@ -23,13 +23,6 @@
   - pooler: cls
   - 1 V100 GPU 
 
-- Run Supervised Training
-```python
-```
-- Run Unsupervised Training
-```python
-```
-
 ## 2. Performance
 - __Inference Datset__
   - KorSTS-test
@@ -37,7 +30,7 @@
 
 - __KorSTS-test__
   
-|Model|AVG|Cosine Pearson|Cosine Spearman|Euclidean Pearson|Euclidean Sparman|Manhatten Pearson|Manhatten Spearman|Dot Pearson|Dot Spearman|
+|Model|AVG|Cosine Pearson|Cosine Spearman|Euclidean Pearson|Euclidean Spearman|Manhatten Pearson|Manhatten Spearman|Dot Pearson|Dot Spearman|
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |SimCSE-BERT-KO<br>(unsup)|||
 |SimCSE-BERT-KO<br>(sup)|82.22|81.63|82.52|82.39|82.57|82.33|82.52|81.50|82.34|
@@ -46,13 +39,18 @@
 
 - __KlueSTS-dev__
 
-|Model|AVG|Cosine Pearson|Cosine Spearman|Euclidean Pearson|Euclidean Sparman|Manhatten Pearson|Manhatten Spearman|Dot Pearson|Dot Spearman|
+|Model|AVG|Cosine Pearson|Cosine Spearman|Euclidean Pearson|Euclidean Spearman|Manhatten Pearson|Manhatten Spearman|Dot Pearson|Dot Spearman|
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |SimCSE-BERT-KO<br>(unsup)|||
 |SimCSE-BERT-KO<br>(sup)|83.96|82.98|84.32|84.32|84.30|84.28|84.20|83.00|84.29|
 |SimCSE-RoBERTa-KO<br>(unsup)|||
 |SimCSE-RoBERTa-KO<br>(sup)|85.31|84.14|85.64|86.09|85.68|86.04|85.65|83.94|85.30|
 
-## 3. Example
+## 3. Implementation
+
+- __Download korSTS__
+- __Supervised Training__
+- __Unsupervised Training__
+- __Evaluation__
 
 ## Citing
