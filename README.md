@@ -79,7 +79,20 @@ sh run_train_unsupervised.sh
 cd evaluation
 sh run_eval.sh
 ```
-
-## 4. HuggingFace Example
-
 ## Citing
+```
+@inproceedings{gao2021simcse,
+   title={{SimCSE}: Simple Contrastive Learning of Sentence Embeddings},
+   author={Gao, Tianyu and Yao, Xingcheng and Chen, Danqi},
+   booktitle={Empirical Methods in Natural Language Processing (EMNLP)},
+   year={2021}
+}
+@article{ham2020kornli,
+ title={KorNLI and KorSTS: New Benchmark Datasets for Korean Natural Language Understanding},
+ author={Ham, Jiyeon and Choe, Yo Joong and Park, Kyubyong and Choi, Ilji and Soh, Hyungjoon},
+ journal={arXiv preprint arXiv:2004.03289},
+ year={2020}
+}
+```
+## Acknowledgement
+This project was inspired by the work from [KoSimCSE](https://github.com/BM-K/KoSimCSE-SKT?tab=readme-ov-file).
