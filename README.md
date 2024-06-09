@@ -2,7 +2,7 @@
 
 - Lighter code to train __Korean SimCSE__   
 - Dependency Problem Alleviation & Ease of Customization     
-- Reference : SimCSE Paper, Original Code
+- Reference : [SimCSE Paper](https://aclanthology.org/2021.emnlp-main.552/), [Original Code](https://github.com/princeton-nlp/SimCSE)
 
 <img src="simcse.PNG" alt="example image" width="600" height="200"/>
 
