@@ -50,6 +50,15 @@
 
 ## 3. Implementation
 
+- __Generate Supervised Dataset__
+
+  You can create a supervised training dataset with KorNLI by following 'data/generate_supervised_dataset.ipynb'.
+
+- __Download Korean Wiki Text__
+```
+cd data
+sh download_korean_wiki_1m.sh
+```
 - __Download korSTS__
 ```
 cd data
