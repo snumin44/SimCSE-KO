@@ -1,0 +1,7 @@
+transformers
+torch
+scipy
+datasets
+pandas
+scikit-learn
+prettytable
