@@ -197,10 +197,15 @@ def train(encoder, train_dataloader, test_dataset, optimizer, scheduler, args, s
                 optimizer.step()
             
             scheduler.step()
-                
+            
+            if isinstance(encoder, nn.DataParallel):
+                model_to_save = encoder.module
+            else:
+                model_to_save = encoder
+            
             if args.eval_strategy == 'steps' and (step+1) % args.eval_step == 0:
                 epoch_c = round((step + 1) / len(train_dataloader), 2)
-                results = inference(encoder.module, test_dataset, args)    
+                results = inference(model_to_save, test_dataset, args)    
                 spearman, pearson = results['cosine_pearson'], results['cosine_spearman']
                 print(f'Epoch:{epoch_c}, Step:{step+1}, Loss:{round(float(train_loss.mean()), 4)}, Pearson:{round(pearson*100, 2)}, Spearman:{round(spearman*100, 2)}')
                     
@@ -208,11 +213,11 @@ def train(encoder, train_dataloader, test_dataset, optimizer, scheduler, args, s
                     best_score = spearman
                     # save_checkpoint
                     LOGGER.info(f'>>> Save the best model checkpoint in {args.output_path}.')
-                    encoder.module.save_model(args.output_path)
-                encoder.train()
+                    model_to_save.save_model(args.output_path)
+                model_to_save.train()
 
         if args.eval_strategy == 'epoch':
-            results = inference(encoder.module, test_dataset, args)    
+            results = inference(model_to_save, test_dataset, args)    
             spearman, pearson = results['cosine_pearson'], results['cosine_spearman']
             print(f'Epoch:{epoch_i+1}, Step:{step+1}, Loss:{round(float(train_loss.mean()), 4)}, Pearson:{round(pearson*100, 2)}, Spearman:{round(spearman*100, 2)}')
 
@@ -220,8 +225,8 @@ def train(encoder, train_dataloader, test_dataset, optimizer, scheduler, args, s
                 best_score = spearman
                 # save_checkpoint
                 LOGGER.info(f'>>> Save the best model checkpoint in {args.output_path}.')
-                encoder.module.save_model(args.output_path)
-            encoder.train()
+                model_to_save.save_model(args.output_path)
+            model_to_save.train()
 
     avg_train_loss = total_train_loss / (len(train_dataloader) * args.epochs)
     training_time = format_time(time.time() - t0)
