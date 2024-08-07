@@ -23,7 +23,7 @@
   - drop out: 0.1
   - temp: 0.05
   - pooler: cls
-  - 1 V100 GPU 
+  - 1 A100 GPU 
 
 ## 2. Performance
 - __Inference Datset__
@@ -35,7 +35,7 @@
 |Model|AVG|Cosine Pearson|Cosine Spearman|Euclidean Pearson|Euclidean Spearman|Manhatten Pearson|Manhatten Spearman|Dot Pearson|Dot Spearman|
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |SimCSE-BERT-KO<br>(unsup)|66.68|67.24|66.62|66.31|66.65|66.24|66.52|67.24|66.64|
-|SimCSE-BERT-KO<br>(sup)|82.22|81.63|82.52|82.39|82.57|82.33|82.52|81.50|82.34|
+|SimCSE-BERT-KO<br>(sup)|82.05|81.51|82.30|82.26|82.35|82.22|82.33|81.36|82.07|
 |SimCSE-RoBERTa-KO<br>(unsup)|75.79|76.39|75.57|75.71|75.52|75.65|75.42|76.41|75.63|
 |SimCSE-RoBERTa-KO<br>(sup)|83.06|82.67|83.21|83.22|83.27|83.24|83.28|82.54|83.03|82.92|
 
@@ -44,7 +44,7 @@
 |Model|AVG|Cosine Pearson|Cosine Spearman|Euclidean Pearson|Euclidean Spearman|Manhatten Pearson|Manhatten Spearman|Dot Pearson|Dot Spearman|
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |SimCSE-BERT-KO<br>(unsup)|65.27|66.27|64.31|66.18|64.05|66.00|63.77|66.64|64.93|
-|SimCSE-BERT-KO<br>(sup)|83.96|82.98|84.32|84.32|84.30|84.28|84.20|83.00|84.29|
+|SimCSE-BERT-KO<br>(sup)|83.91|82.88|84.26|84.30|84.22|84.23|84.18|82.91|84.28|
 |SimCSE-RoBERTa-KO<br>(unsup)|80.78|81.20|80.35|81.27|80.36|81.28|80.40|81.13|80.26|
 |SimCSE-RoBERTa-KO<br>(sup)|85.31|84.14|85.64|86.09|85.68|86.04|85.65|83.94|85.30|
 
