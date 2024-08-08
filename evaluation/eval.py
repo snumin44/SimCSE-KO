@@ -40,16 +40,16 @@ def argument_parser():
     parser.add_argument('--max_length', default=64, type=int,
                         help='Max length of sequence'
                        )
-    parser.add_argument('--padding', action="store_true",
+    parser.add_argument('--padding', action="store_false", default=True,
                         help='Add padding to short sentences'
                        )
-    parser.add_argument('--truncation', action="store_true",
+    parser.add_argument('--truncation', action="store_false", default=True,
                         help='Truncate extra tokens when exceeding the max_length'
                        )
     parser.add_argument('--batch_size', default=256, type=int,
                         help='Batch size'
                        )
-    parser.add_argument('--shuffle', action="store_true",
+    parser.add_argument('--shuffle', action="store_false", default=True,
                         help='Load shuffled sequences'
                        )
 
@@ -130,6 +130,11 @@ def main(args):
     metrics_2, scores_2 = metrics[half:], scores[half:]
 
     print_table(metrics_1, scores_1)
+    print_table(metrics_2, scores_2)
+
+if __name__ == '__main__':
+    args = argument_parser()
+    main(args)
     print_table(metrics_2, scores_2)
 
 if __name__ == '__main__':
