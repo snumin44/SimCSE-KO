@@ -82,13 +82,13 @@ sh run_eval.sh
 
 ## 4. HuggingFace Example
 
-- Checkpoints
+- __Checkpoints__
   - [snumin44/simcse-ko-bert-supervised](https://huggingface.co/snumin44/simcse-ko-bert-supervised)
   - [snumin44/simcse-ko-bert-unsupervised](https://huggingface.co/snumin44/simcse-ko-bert-unsupervised)
   - [snumin44/simcse-ko-roberta-supervised](https://huggingface.co/snumin44/simcse-ko-roberta-supervised)
   - [snumin44/simcse-ko-roberta-unsupervised](https://huggingface.co/snumin44/simcse-ko-roberta-unsupervised)
 
-- Example
+- __Example__
 ```python
 import numpy as np
 from transformers import AutoModel, AutoTokenizer
