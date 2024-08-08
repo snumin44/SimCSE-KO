@@ -55,16 +55,16 @@ def argument_parser():
     parser.add_argument('--max_length', default=64, type=int,
                         help='Max length of sequence'
                        )
-    parser.add_argument('--padding', action="store_true",
+    parser.add_argument('--padding', action="store_false", default=True,
                         help='Add padding to short sentences'
                        )
-    parser.add_argument('--truncation', action="store_true",
+    parser.add_argument('--truncation', action="store_false", default=True,
                         help='Truncate extra tokens when exceeding the max_length'
                        )
     parser.add_argument('--batch_size', default=256, type=int,
                         help='Batch size'
                        )
-    parser.add_argument('--shuffle', action="store_true",
+    parser.add_argument('--shuffle', action="store_false", default=True,
                         help='Load shuffled sequences'
                        )
 
@@ -156,7 +156,7 @@ def format_time(elapsed):
     elapsed_rounded = int(round((elapsed))) # Round to the nearest second.
     return str(datetime.timedelta(seconds=elapsed_rounded)) # Format as hh:mm:ss 
 
-def train(encoder, train_dataloader, test_dataset, optimizer, scheduler, args, scaler):
+def train(encoder, train_dataloader, test_dataset, optimizer, scheduler, scaler, args):
     best_score = None
     total_train_loss = 0
 
@@ -176,26 +176,17 @@ def train(encoder, train_dataloader, test_dataset, optimizer, scheduler, args, s
 
             optimizer.zero_grad()
 
+            train_loss = encoder(input_ids, attention_mask, token_type_ids)
+            
             if args.amp:
-                with autocast():
-                    train_loss = encoder(input_ids, attention_mask, token_type_ids)
-            else:
-                train_loss = encoder(input_ids, attention_mask, token_type_ids)
-                
-            total_train_loss += train_loss.mean()
-
-            # Clip the norm of the gradients to 1.0.
-            # This is to help prevent the "exploding gradients" problem.
-            torch.nn.utils.clip_grad_norm_(encoder.parameters(), max_norm=5.0)   
-                
-            if args.amp:
-                scaler.scale(train_loss.mean()).backward()
+                scaler.scale(train_loss.mean()).backward()                
                 scaler.step(optimizer)
-                scaler.update()
+                scaler.update()            
+
             else:
                 train_loss.mean().backward()
                 optimizer.step()
-            
+                
             scheduler.step()
             
             if isinstance(encoder, nn.DataParallel):
@@ -213,7 +204,13 @@ def train(encoder, train_dataloader, test_dataset, optimizer, scheduler, args, s
                     best_score = spearman
                     # save_checkpoint
                     LOGGER.info(f'>>> Save the best model checkpoint in {args.output_path}.')
+                    
+                    if isinstance(encoder, nn.DataParallel):
+                        model_to_save = encoder.module
+                    else: model_to_save = encoder
+                    
                     model_to_save.save_model(args.output_path)
+                
                 model_to_save.train()
 
         if args.eval_strategy == 'epoch':
@@ -225,12 +222,18 @@ def train(encoder, train_dataloader, test_dataset, optimizer, scheduler, args, s
                 best_score = spearman
                 # save_checkpoint
                 LOGGER.info(f'>>> Save the best model checkpoint in {args.output_path}.')
+
+                if isinstance(encoder, nn.DataParallel):
+                        model_to_save = encoder.module
+                else: model_to_save = encoder
+                
                 model_to_save.save_model(args.output_path)
+
             model_to_save.train()
 
     avg_train_loss = total_train_loss / (len(train_dataloader) * args.epochs)
     training_time = format_time(time.time() - t0)
-    print(f"Training Time: {training_time}, Average Training Loss: {avg_train_loss}, Best Score: {best_score}")
+    print(f"Training Time: {training_time}, Average Training Loss: {avg_train_loss}, Best Score: {round(best_score*100, 2)}")
 
 def main(args):
     init_logging()
@@ -269,7 +272,7 @@ def main(args):
 
     # Train!
     torch.cuda.empty_cache()
-    train(encoder, train_dataloader, valid_dataset, optimizer, scheduler, args, scaler)
+    train(encoder, train_dataloader, valid_dataset, optimizer, scheduler, scaler, args)
 
 if __name__ == '__main__':
     args = argument_parser()
