@@ -15,6 +15,3 @@ CUDA_VISIBLE_DEVICES=$GPU_ID python3 train.py \
         --eval_strategy 'steps' \
         --eval_step 100 \
         --amp \
-        --padding  \
-        --truncation \
-        --shuffle 
