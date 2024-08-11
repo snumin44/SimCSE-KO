@@ -191,8 +191,7 @@ def train(encoder, train_dataloader, test_dataset, optimizer, scheduler, scaler,
             
             if isinstance(encoder, nn.DataParallel):
                 model_to_save = encoder.module
-            else:
-                model_to_save = encoder
+            else: model_to_save = encoder
             
             if args.eval_strategy == 'steps' and (step+1) % args.eval_step == 0:
                 epoch_c = round((step + 1) / len(train_dataloader), 2)
@@ -203,12 +202,7 @@ def train(encoder, train_dataloader, test_dataset, optimizer, scheduler, scaler,
                 if not best_score or spearman > best_score:
                     best_score = spearman
                     # save_checkpoint
-                    LOGGER.info(f'>>> Save the best model checkpoint in {args.output_path}.')
-                    
-                    if isinstance(encoder, nn.DataParallel):
-                        model_to_save = encoder.module
-                    else: model_to_save = encoder
-                    
+                    LOGGER.info(f'>>> Save the best model checkpoint in {args.output_path}.')                    
                     model_to_save.save_model(args.output_path)
                 
                 model_to_save.train()
@@ -221,12 +215,7 @@ def train(encoder, train_dataloader, test_dataset, optimizer, scheduler, scaler,
             if not best_score or spearman > best_score:
                 best_score = spearman
                 # save_checkpoint
-                LOGGER.info(f'>>> Save the best model checkpoint in {args.output_path}.')
-
-                if isinstance(encoder, nn.DataParallel):
-                        model_to_save = encoder.module
-                else: model_to_save = encoder
-                
+                LOGGER.info(f'>>> Save the best model checkpoint in {args.output_path}.')                
                 model_to_save.save_model(args.output_path)
 
             model_to_save.train()
